@@ -21,7 +21,10 @@ fetchMyIP((error, ip) => {
       return;
     }
   
-    console.log('The Co- ordinates: ', coordinate );
+    console.log('The Co- ordinates: ', coordinate);
+    fetchISSFlyOverTimes(coordinate, (result) => {
+      console.log('callback for fetchISSFlyOverTimes called:', result);
+    });
   });
 });
 
