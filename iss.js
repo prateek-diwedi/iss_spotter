@@ -34,19 +34,16 @@ const fetchCoordsByIP = function(ip, callback) {
       callback(Error(`Status Code ${response.statusCode} when fetching IP: ${body}`), null);
       return;
     }
-    // getting latitude..***** 
-    const latitude = JSON.parse(body).data.latitude;
-    callback(null, latitude);
-    // getting longitude..*****
-    const longitude = JSON.parse(body).data.longitude;
-    callback(null, longitude);
+    // getting latitude and longitude..***** 
+    const { latitude, longitude } = JSON.parse(body).data;
+    callback(null, {latitude, longitude});
   });
 };
 
-// const fetchISSFlyOverTimes = function(coords, callback) {
+ const fetchISSFlyOverTimes = function(coords, callback) {
 //   // ...
-//   request()
-// };
+   request()
+ };
 
 
-module.exports = { fetchMyIP ,  fetchCoordsByIP };
+module.exports = { fetchMyIP ,  fetchCoordsByIP, fetchISSFlyOverTimes };
