@@ -43,15 +43,14 @@ const fetchCoordsByIP = function(ip, callback) {
 const fetchISSFlyOverTimes = function(coords, callback) {
 //   // ...
   const url = `http://api.open-notify.org/iss-pass.json?lat=${coords.latitude}&lon=${coords.longitude}`;
-  console.log('url is:', url);
   request(url, (error, response, body) => {
     if (error) {
       console.log('error:', error);
     } else {
-      callback(body);
+      const passes = JSON.parse(body).response;
+      callback(null, passes);
     }
   });
 };
-
 
 module.exports = { fetchMyIP ,  fetchCoordsByIP, fetchISSFlyOverTimes };

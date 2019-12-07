@@ -20,13 +20,31 @@ fetchMyIP((error, ip) => {
       console.log("It didn't worked!", error);
       return;
     }
-  
     console.log('The Co- ordinates: ', coordinate);
-    fetchISSFlyOverTimes(coordinate, (result) => {
-      console.log('callback for fetchISSFlyOverTimes called:', result);
-    });
+
+    // fetching flyover times from calling api****
+    fetchISSFlyOverTimes(coordinate, (error, result) => {
+      if (error) {
+        console.log("It didn't worked!", error);
+        return;
+      }
+      //console.log('callback for fetchISSFlyOverTimes called:', result);
+
+      // printing time in readable format..*****
+      printPassTime = function(error, result) {
+        if (error) {
+          console.log("It didn't worked!", error);
+          return;
+        }
+        for (pass of result) {
+          const dateTime = new Date(0);
+          dateTime.setUTCSeconds(pass.risetime);
+          const durationTime = pass.duration;
+          console.log(`Next pass at ${dateTime} for ${durationTime} seconds!`)
+      }
+    };
+      printPassTime(null, result);
+
   });
 });
-
-
-
+});
